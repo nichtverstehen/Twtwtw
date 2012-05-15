@@ -20,4 +20,6 @@ libraryDependencies ++= Seq(
 
 libraryDependencies += "com.mongodb.casbah" %% "casbah" % "2.1.5-1"
 
-libraryDependencies += "net.databinder" %% "unfiltered-filter" % "0.6.2"
+libraryDependencies ++= Seq(
+  "net.databinder" %% "unfiltered-filter" % "0.6.2"
+)
