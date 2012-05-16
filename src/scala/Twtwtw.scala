@@ -1,5 +1,6 @@
 import com.mongodb.casbah.Imports._
 import dispatch._
+import java.util.Date
 import scala.util.parsing.json._
 import util.Properties
 
@@ -45,27 +46,28 @@ object Index {
     url
   }
 
-  def indexUser(user_name: String) {
+  def indexUser(user_name: String): Boolean = {
     println("indexing "+user_name)
 
     val feed_url = feedUrl("screen_name="+user_name, 0, 0)
 
     val tweets = loadUserFeed(feed_url)
     println("indexing "+user_name+": "+tweets.length+"tweets")
-    if (tweets.isEmpty) return
+    if (tweets.isEmpty) return false
 
     val user_id = tweets.head.user
     val max_id = tweets.maxBy(_.id).id
 
     if (!usersColl.find(MongoDBObject("user_id" -> user_id)).isEmpty) {
       println("indexing "+user_name+": already indexed")
-      return
+      return true
     }
 
     val mongoUser = MongoDBObject("user_id" -> user_id, "user_name" -> user_name, "max_id" -> max_id)
     usersColl += mongoUser
 
     tweets.foreach(indexTweet)
+    true
   }
 
   def searchTerm(user_id: Long, term: String): List[Search.IndexItem] = {
@@ -91,7 +93,7 @@ object Index {
         .map((z) => z: MongoDBObject)
         .flatMap(Search.Tweet.fromDb)
         .map((z) => (z, occur))})
-    tweets
+    tweets.sortBy(_._1.date)(Ordering[Date].reverse)
   }
 
   def mapUser(user_name: String): Option[Long] = {
