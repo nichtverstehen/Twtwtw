@@ -52,6 +52,8 @@
     <orderEntry type="library" name="scalate-util-1.5.3" level="project" />
     <orderEntry type="library" name="jetty-io-7.6.0.v20120127" level="project" />
     <orderEntry type="library" name="jetty-continuation-7.6.0.v20120127" level="project" />
+    <orderEntry type="library" name="classes" level="project" />
+    <orderEntry type="library" name="scala-library" level="project" />
   </component>
 </module>
 
