@@ -56,14 +56,21 @@ object Search {
 }
 
 object Index {
-  val mongoUrl = Properties.envOrElse("MONGOHQ_URL", "mongodb://127.0.0.1/twtwtw")
-  println(mongoUrl)
-  val mongoConn = MongoConnection(MongoURI(mongoUrl))
-  val twtwtwDB = mongoConn("twtwtw")
-  val indexColl = twtwtwDB("index")
-  val tweetsColl = twtwtwDB("tweets")
-  val usersColl = twtwtwDB("users")
+  val twtwtwDb = openDb()
+  val indexColl = twtwtwDb("index")
+  val tweetsColl = twtwtwDb("tweets")
+  val usersColl = twtwtwDb("users")
   indexColl.ensureIndex(MongoDBObject("user" -> 1, "term" -> 1))
+
+  def openDb(): MongoDB = {
+    val mongoUrl = Properties.envOrElse("MONGOHQ_URL", "mongodb://127.0.0.1:27017/twtwtw")
+    val regex = """mongodb://(?:(\w+):(\w+)@)?([\w|\.]+):(\d+)/(\w+)""".r
+    val regex(u, p, host, port, dbName) = mongoUrl
+    val mongoConn = MongoConnection(host, port.toInt)
+    val twtwtwDb = mongoConn(dbName)
+    if (u != null) twtwtwDb.authenticate(u, p)
+    twtwtwDb
+  }
 
   def indexTweet(tweet: Map[String, Any]) {
     val tweet_id = tweet("id").asInstanceOf[Double].round
@@ -129,7 +136,7 @@ object Test {
 
     println(terms)*/
 
-    Index.indexUser("dhh")
+    //Index.indexUser("dhh")
 
     println(Index.searchWord("dhh", "place"))
   }
