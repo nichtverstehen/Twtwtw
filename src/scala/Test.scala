@@ -136,7 +136,7 @@ object Test {
 
     println(terms)*/
 
-    //Index.indexUser("dhh")
+    Index.indexUser("dhh")
 
     println(Index.searchWord("dhh", "place"))
   }
