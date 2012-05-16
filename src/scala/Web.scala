@@ -8,6 +8,13 @@ import util.Properties
 object Handlers {
   implicit val engine = new TemplateEngine(List(new java.io.File("templates")))
 
+  def enrichTweet(user_name: String)(tw: Search.Tweet, occur: Search.IndexItem): Map[String, Any] = {
+    var props = Utils.getCCParams(tw)
+    props += ("tweet_id_str" -> tw.id.toString)
+    props += ("user_name" -> user_name)
+    props
+  }
+
   val intent = unfiltered.Cycle.Intent[Any, Any] {
     case req@GET(Path("/")) => Ok ~> Scalate(req, "main.mustache")
     case req@GET(Path("/search")) => {
@@ -15,9 +22,15 @@ object Handlers {
       val user: String = params("user").head
       val words: String = params("words").head
 
-      val results = Index.searchWord(user, words)
-
-      Ok ~> Scalate(req, "main.mustache", "results" -> true, "user" -> user, "words" -> words, "tweets" -> results)
+      val userId = Index.mapUser(user)
+      if (userId.isEmpty) {
+        Ok ~> Scalate(req, "main.mustache", "results" -> false, "user" -> user, "words" -> words)
+      }
+      else {
+        val results = Index.searchWords(userId.get, words)
+        val rich_results = results.map((tw) => enrichTweet(user)(tw._1, tw._2))
+        Ok ~> Scalate(req, "main.mustache", "results" -> true, "user" -> user, "words" -> words, "tweets" -> rich_results)
+      }
     }
 
   }
