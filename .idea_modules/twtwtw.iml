@@ -17,6 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../src/scala" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../unfiltered-scalate/src/main/scala" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -38,6 +39,11 @@
     <orderEntry type="library" name="org.scalaj_scalaj-collection_2.9.1_1.2" level="project" />
     <orderEntry type="library" name="com.mongodb.casbah_casbah-core_2.9.1_2.1.5-1" level="project" />
     <orderEntry type="library" name="com.mongodb.casbah_casbah-gridfs_2.9.1_2.1.5-1" level="project" />
+    <orderEntry type="library" name="unfiltered_2.9.1-0.6.2" level="project" />
+    <orderEntry type="library" name="unfiltered-filter_2.9.1-0.6.2" level="project" />
+    <orderEntry type="library" name="unfiltered-util_2.9.1-0.6.2" level="project" />
+    <orderEntry type="library" name="scalate-core-1.5.3" level="project" />
+    <orderEntry type="library" name="unfiltered-jetty_2.9.1-0.6.2" level="project" />
   </component>
 </module>
 
