@@ -1,7 +1,9 @@
 import com.mongodb.casbah.Imports._
+import com.mongodb.casbah.MongoURI
 import dispatch._
 import org.tartarus.snowball.ext.englishStemmer
 import scala.util.parsing.json._
+import util.Properties
 
 object Utils {
   def spansOf[T](f: (T) => Boolean)(s: Seq[T]): List[Seq[T]] = s match {
@@ -54,7 +56,7 @@ object Search {
 }
 
 object Index {
-  val mongoConn = MongoConnection()
+  val mongoConn = MongoConnection(MongoURI(Properties.envOrElse("MONGOHQ_URL", "mongodb://127.0.0.1/twtwtw")))
   val twtwtwDB = mongoConn("twtwtw")
   val indexColl = twtwtwDB("index")
   val tweetsColl = twtwtwDB("tweets")
@@ -125,7 +127,7 @@ object Test {
 
     println(terms)*/
 
-    //Index.indexUser("dhh")
+    Index.indexUser("dhh")
 
     println(Index.searchWord("dhh", "place"))
   }
