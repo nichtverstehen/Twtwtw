@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="org.eclipse">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.ivy2/cache/org.eclipse.jetty" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

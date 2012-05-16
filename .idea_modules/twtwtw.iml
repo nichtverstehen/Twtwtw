@@ -44,6 +44,14 @@
     <orderEntry type="library" name="unfiltered-util_2.9.1-0.6.2" level="project" />
     <orderEntry type="library" name="scalate-core-1.5.3" level="project" />
     <orderEntry type="library" name="unfiltered-jetty_2.9.1-0.6.2" level="project" />
+    <orderEntry type="library" name="jetty-servlet-7.6.0.v20120127" level="project" />
+    <orderEntry type="library" name="jetty-http-7.6.0.v20120127" level="project" />
+    <orderEntry type="library" name="jetty-server-7.6.0.v20120127" level="project" />
+    <orderEntry type="library" name="jetty-util-7.6.0.v20120127" level="project" />
+    <orderEntry type="library" name="servlet-api-2.5" level="project" />
+    <orderEntry type="library" name="scalate-util-1.5.3" level="project" />
+    <orderEntry type="library" name="jetty-io-7.6.0.v20120127" level="project" />
+    <orderEntry type="library" name="jetty-continuation-7.6.0.v20120127" level="project" />
   </component>
 </module>
 
