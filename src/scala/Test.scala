@@ -56,7 +56,9 @@ object Search {
 }
 
 object Index {
-  val mongoConn = MongoConnection(MongoURI(Properties.envOrElse("MONGOHQ_URL", "mongodb://127.0.0.1/twtwtw")))
+  val mongoUrl = Properties.envOrElse("MONGOHQ_URL", "mongodb://127.0.0.1/twtwtw")
+  println(mongoUrl)
+  val mongoConn = MongoConnection(MongoURI(mongoUrl))
   val twtwtwDB = mongoConn("twtwtw")
   val indexColl = twtwtwDB("index")
   val tweetsColl = twtwtwDB("tweets")
