@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<title>
+{{#results}}
+    {{query}} - Twtwtw
+{{/results}}
+{{^results}}
+    Twtwtw
+{{/results}}
+</title>
+<style>
+
+</style>
+<body>
+
+<h1>Twtwtw</h1>
+
+<form method=get action=search>
+    <label>Words <input type=text name=words value="{{words}}"></label>
+    <label>User <input type=text name=user value={{user}}></label>
+    <input type=submit>
+</form>
+
+{{#results}}
+<p>Searching for {{words}} in {{user}}'s feed.</p>
+
+    {{#tweets}}
+    <p>{{{.}}}</p>
+    {{/tweets}}
+
+{{/results}}
