@@ -23,3 +23,7 @@ libraryDependencies += "com.mongodb.casbah" %% "casbah" % "2.1.5-1"
 libraryDependencies ++= Seq(
   "net.databinder" %% "unfiltered-filter" % "0.6.2"
 )
+
+resolvers += "scala-tools releases" at "http://scala-tools.org/repo-releases/"
+
+resolvers += "scala-tools snapshots" at "http://scala-tools.org/repo-snapshots/"
